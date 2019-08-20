@@ -60,24 +60,33 @@ class AddTodo extends Component {
     const {isLoading, errorMessage, title, content, priority, dueTime } = this.state;
     if (isLoading) return;
 
-    if (this.refs.addTodoUI.validateAndSaveInput()) {
-      this.setState({isLoading: true});
-      createTodo({title, content, priority, dueTime})
-      .then(()=>{
-        this.setState({isLoading: false});
-        this.props.navigation.state.params.refreshList();
-        this.props.navigation.goBack();
-      })
-      .catch((error)=>{
-        this.setState({isLoading: false});
-        Alert.alert(
-          'Error',
-          error,
-          [{text: 'OK'},],
-          {cancelable: true},
-        );
-      })
+    if (!this.refs.addTodoUI.validateAndSaveInput()) {
+      const message = this.refs.addTodoUI.getErrors();
+      Alert.alert(
+        'Error',
+        message,
+        [{text: 'Cancel'},],
+        {cancelable: true},
+      );
+      return;
     }
+
+    this.setState({isLoading: true});
+    createTodo({title, content, priority, dueTime})
+    .then(()=>{
+      this.setState({isLoading: false});
+      this.props.navigation.state.params.refreshList();
+      this.props.navigation.goBack();
+    })
+    .catch((error)=>{
+      this.setState({isLoading: false});
+      Alert.alert(
+        'Error',
+        error,
+        [{text: 'OK'},],
+        {cancelable: true},
+      );
+    })
   }
 
   onBackPress = () => {

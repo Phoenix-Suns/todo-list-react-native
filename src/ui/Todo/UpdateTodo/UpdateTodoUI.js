@@ -88,6 +88,12 @@ class UpdateTodoUI extends Component<Props> {
     this.setState({ errorTexts });
     return result;
   }
+
+  getErrors = () => {
+    const {errorTexts} = this.state;
+    const filtered = errorTexts.filter(item => item != undefined )
+    return filtered.join('\n');
+  }
   //endregion
 
   //#region Render
@@ -113,35 +119,47 @@ class UpdateTodoUI extends Component<Props> {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Text>Title</Text>
+        <Text style={AppStyles.inputTitle}>
+          Title
+        </Text>
         <TextInput
+          style={AppStyles.input}
           placeholder='TITLE'
           onChangeText={(text)=>{this.validateAndSaveInput(INPUT_TAG.TITLE, text);}}
           value={title}
         />
-        <Text>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.TITLE]}
         </Text>
-        <Text>Content</Text>
+        <Text style={AppStyles.inputTitle}>
+          Content
+        </Text>
         <TextInput
+          style={AppStyles.input}
           placeholder='CONTENT'
           onChangeText={(text)=>{this.validateAndSaveInput(INPUT_TAG.CONTENT, text);}}
           value={content}
         />
-        <Text>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.CONTENT]}
         </Text>
-        <Text>Priority</Text>
-        <Button
-          title={priority}
-          onPress={()=>{this.refs.priorityModal.show();}}
-        />
-        <Text>
+        <Text style={AppStyles.inputTitle}>
+          Priority
+        </Text>
+        <TouchableOpacity
+          onPress={()=>{this.refs.priorityModal.show();}}>
+            <Text style={AppStyles.input}>
+              {priority}
+            </Text>
+        </TouchableOpacity>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.PRIORITY]}
         </Text>
-        <Text>DueTime</Text>
+        <Text style={AppStyles.inputTitle}>
+          Due Time
+        </Text>
         <DatePicker
-          style={{ width: '100%' }}
+          style={{width: '100%'}}
           date={dueTime}
           onDateChange={(text)=>{this.validateAndSaveInput(INPUT_TAG.DUE_TIME, text);}}
           mode="date"
@@ -151,13 +169,14 @@ class UpdateTodoUI extends Component<Props> {
           cancelBtnText="Cancel"
           customStyles={{ 
             dateIcon: {
-            display: 'none',
-          },
-          dateInput: {
-            marginLeft: 0,
-          }}
+              display: 'none',
+            },
+            dateInput: {
+              ...AppStyles.input,
+              alignItems: 'flex-start',
+            }}
         }/>
-        <Text>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.DUE_TIME]}
         </Text>
 

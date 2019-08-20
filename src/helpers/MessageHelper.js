@@ -13,7 +13,7 @@ export const ShowAlertSuccess = (message) => {
     [
       { text: 'OK' },
     ],
-    { cancelable: false },
+    { cancelable: true },
   );
 };
 

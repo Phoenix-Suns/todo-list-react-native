@@ -57,8 +57,7 @@ class TodoList extends Component {
   }
 
   _onRowPress = (item) => {
-    console.log(item);
-    this.props.navigation.navigate('UpdateTodo', { refreshList: this.refreshList.bind(this) });
+    this.props.navigation.navigate('UpdateTodo', {item, refreshList: this.refreshList.bind(this) });
   }
   // #endregion
 

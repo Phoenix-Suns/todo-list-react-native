@@ -3,12 +3,12 @@ import {
   Dimensions,
   PixelRatio,
   StyleSheet,
-  StatusBar
-} from "react-native";
-import DeviceInfo from "../helpers/DeviceInfo";
+  StatusBar,
+} from 'react-native';
+import DeviceInfo from '../helpers/DeviceInfo';
 
 export const AppImages = {
-  LOGO: require("../assets/images/logo.png")
+  LOGO: require('../assets/images/logo.png'),
 };
 
 export const AppFonts = {};
@@ -23,33 +23,33 @@ export const DefaultProps = {
   avatarSize: 120 * DeviceInfo.displayScale,
   iconHeaderUserProfileWidth: 32 * DeviceInfo.displayScale,
   iconHeaderNotificationWidth: 32 * DeviceInfo.displayScale,
-  iconHeaderStarWidth: 25 * DeviceInfo.displayScale
+  iconHeaderStarWidth: 25 * DeviceInfo.displayScale,
 };
 
 export const Colors = {
-  main: "#005083",
-  background: "#F6F6F6",
-  blackBlur: "#00000088",
-  grayBlur: "#969696"
+  main: '#005083',
+  background: '#F6F6F6',
+  blackBlur: '#00000088',
+  grayBlur: '#969696',
 };
 
 export const AppStyles = StyleSheet.create({
   // #region Header
   statusBar: {
-    height: Platform.OS === "ios" ? 20 : StatusBar.currentHeight
+    height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
   },
 
   header: {
     height: DefaultProps.navigationBarDefaultHeight,
     backgroundColor: Colors.main,
-    paddingHorizontal: 16 * DeviceInfo.displayScale
+    paddingHorizontal: DeviceInfo.toDisplaySize(16),
   },
 
   headerEmpty: {
     height: DefaultProps.navigationBarDefaultHeight,
     backgroundColor: Colors.main,
     borderBottomWidth: 0,
-    elevation: 0
+    elevation: 0,
   },
 
   headerTitle: {
@@ -57,71 +57,90 @@ export const AppStyles = StyleSheet.create({
     // alignSelf: 'center',
     // justifyContent: 'center',
     // alignItems: 'center',
-    textAlign: "center",
-    textAlignVertical: "center",
-    color: "white",
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: 'white',
     fontSize: 17 * DeviceInfo.displayScale,
-    fontWeight: "bold"
+    fontWeight: 'bold',
   },
   // #endregion
 
   // #region Button
   buttonAction: {
     width: 32 * DeviceInfo.displayScale,
-    height: 32 * DeviceInfo.displayScale
+    height: 32 * DeviceInfo.displayScale,
   },
   // #endregion
 
   // #region ERROR
   errorContain: {
-    borderColor: "transparent"
+    borderColor: 'transparent',
   },
   errorText: {
-    color: "red",
-    alignSelf: "flex-start"
+    color: 'red',
+    alignSelf: 'flex-start',
   },
   // #endregion
 
-  //#region FORM
+  // #region FORM
   inputTitle: {
+    //backgroundColor: 'blue',
     width: '100%',
-    height: 32 * DeviceInfo.displayScale
+    //height: 16 * DeviceInfo.displayScale,
+    fontSize: 14 * DeviceInfo.displayScale,
+    color: Colors.grayBlur,
+    paddingBottom: 4 * DeviceInfo.displayScale,
   },
   input: {
-    height: 40 * DeviceInfo.displayScale, 
-    width: '100%', 
-    textAlignVertical: 'center'
+    //backgroundColor: 'green',
+    width: '100%',
+    //height: 40 * DeviceInfo.displayScale,
+    fontSize: 18 * DeviceInfo.displayScale,
+    textAlignVertical: 'center',
+    borderColor: Colors.grayBlur,
+    borderWidth: 2,
+    borderRadius: 8,
+    paddingVertical: 6,
+    paddingHorizontal: 16,
   },
-  //#endregion
+  inputError: {
+    //backgroundColor: 'blue',
+    width: '100%',
+    //height: 16 * DeviceInfo.displayScale,
+    fontSize: 14 * DeviceInfo.displayScale,
+    color: 'red',
+    paddingBottom: 4 * DeviceInfo.displayScale,
+  },
+  // #endregion
 
   loadingView: {
     flex: 1,
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
-    justifyContent: "center",
-    backgroundColor: Colors.blackBlur
+    justifyContent: 'center',
+    backgroundColor: Colors.blackBlur,
   },
 
   toastContainer: {
     marginHorizontal: 50 * DeviceInfo.displayScale,
     borderRadius: 3 * DeviceInfo.displayScale,
-    backgroundColor: "black"
+    backgroundColor: 'black',
   },
 
   toastText: {
     paddingVertical: 5 * DeviceInfo.displayScale,
     paddingHorizontal: 10 * DeviceInfo.displayScale,
-    textAlign: "center",
-    color: "white",
+    textAlign: 'center',
+    color: 'white',
     fontSize: 14 * DeviceInfo.displayScale,
-    fontWeight: "bold"
+    fontWeight: 'bold',
   },
 
   contentContainer: {
     backgroundColor: Colors.background,
-    flex: 1
-  }
+    flex: 1,
+  },
 });

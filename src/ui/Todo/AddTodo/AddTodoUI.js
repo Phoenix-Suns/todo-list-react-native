@@ -85,6 +85,12 @@ class AddTodoUI extends Component<Props> {
     this.setState({ errorTexts });
     return result;
   }
+
+  getErrors = () => {
+    const {errorTexts} = this.state;
+    const filtered = errorTexts.filter(item => item != undefined )
+    return filtered.join('\n');
+  }
   //endregion
 
   //#region Render
@@ -110,22 +116,28 @@ class AddTodoUI extends Component<Props> {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Text>Title</Text>
+        <Text style={AppStyles.inputTitle}>
+          Title
+        </Text>
         <TextInput
+          style={AppStyles.input}
           placeholder='TITLE'
           onChangeText={(text)=>{this.validateAndSaveInput(INPUT_TAG.TITLE, text);}}
           value={title}
         />
-        <Text>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.TITLE]}
         </Text>
-        <Text>Content</Text>
+        <Text style={AppStyles.inputTitle}>
+          Content
+        </Text>
         <TextInput
+          style={AppStyles.input}
           placeholder='CONTENT'
           onChangeText={(text)=>{this.validateAndSaveInput(INPUT_TAG.CONTENT, text);}}
           value={content}
         />
-        <Text>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.CONTENT]}
         </Text>
         <Text style={AppStyles.inputTitle}>
@@ -137,12 +149,14 @@ class AddTodoUI extends Component<Props> {
               {priority}
             </Text>
         </TouchableOpacity>
-        <Text>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.PRIORITY]}
         </Text>
-        <Text>DueTime</Text>
+        <Text style={AppStyles.inputTitle}>
+          Due Time
+        </Text>
         <DatePicker
-          style={{ width: '100%' }}
+          style={{width: '100%'}}
           date={dueTime}
           onDateChange={(text)=>{this.validateAndSaveInput(INPUT_TAG.DUE_TIME, text);}}
           mode="date"
@@ -155,10 +169,11 @@ class AddTodoUI extends Component<Props> {
               display: 'none',
             },
             dateInput: {
-              marginLeft: 0,
+              ...AppStyles.input,
+              alignItems: 'flex-start',
             }}
         }/>
-        <Text>
+        <Text style={AppStyles.inputError}>
           {errorTexts[INPUT_TAG.DUE_TIME]}
         </Text>
 
@@ -194,13 +209,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16 * DeviceInfo.displayScale,
     flexDirection: 'column',
-  },
-
-  listContainer: {
-    flex: 1
-  },
-  list: {
-    flex: 1
   },
 });
 

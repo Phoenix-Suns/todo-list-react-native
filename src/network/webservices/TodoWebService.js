@@ -1,6 +1,5 @@
 import { URL_DOMAIN, ENDPOINT_TODO } from '../../config/WebServiceConfig';
 import { METHOD_POST, HEADER, METHOD_GET } from '../../helpers/WebServiceHelper';
-import responseTodoList from '../../data/fake/responseTodoList.json';
 import firebase from 'firebase';
 
 const TODO_REF = 'userId/todos';
@@ -34,3 +33,19 @@ export const createTodo = ({title, content, priority, dueTime}) => {
   return request;
 }
 
+export const updateTodo = ({key, title, content, priority, dueTime}) => {
+  const request = firebase.database().ref(TODO_REF + '/' + key)
+    .update({title, content, priority, dueTime});
+    // .then(response => response.json())
+    // .catch(error => error);
+  console.log({key, title, content, priority, dueTime});
+  return request;
+}
+
+export const deleteTodo = ({key}) => {
+  const request = firebase.database().ref(TODO_REF + '/' + key)
+    .remove()
+    // .then(response => response.json())
+    // .catch(error => error);
+  return request;
+}
